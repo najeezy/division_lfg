@@ -35,6 +35,10 @@ gem 'bcrypt', '~> 3.1.7'
 # ReactJS
 gem 'react-rails', '~> 1.6.0'
 
+# babel for es6
+gem "sprockets"
+gem "sprockets-es6"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

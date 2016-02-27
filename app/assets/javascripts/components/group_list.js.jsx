@@ -1,9 +1,9 @@
-var GroupList = React.createClass({
-  render: function() {
+class GroupList extends React.Component {
+  render() {
 
     // create group items
-    var groupItems = []
-    this.props.groups.forEach(function(group) {
+    var groupItems = [];
+    this.props.groups.forEach((group) => {
       groupItems.push(<GroupItem key={group.id} group={group} />);
     });
 
@@ -13,4 +13,4 @@ var GroupList = React.createClass({
       </div>
     );
   }
-});
+}

@@ -1,28 +1,30 @@
-var FilterableGroupList = React.createClass({
-  getInitialState: function() {
-    return {groups: []}
-  },
-  loadGroups: function() {
+class FilterableGroupList extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {groups: []}
+  }
+
+  loadGroups() {
     $.ajax({
       url: '/groups',
       dataType: 'json',
-      success: function(data) {
-        this.setState({groups: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
+      success: (data) => { this.setState({groups: data}) },
+      error(xhr, status, err) {
+        console.error(this.props.url, status, err.toString())
+      }
     });
-  },
-  componentDidMount: function() {
-    this.loadGroups();
-  },
-  render: function() {
+  }
+
+  componentDidMount() {
+    this.loadGroups()
+  }
+
+  render() {
     return (
       <div className="filterableGroupList">
         <SearchBar />
         <GroupList groups={this.state.groups} />
       </div>
-    );
+    )
   }
-});
+}

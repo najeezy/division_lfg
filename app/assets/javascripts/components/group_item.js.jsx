@@ -1,8 +1,8 @@
-var GroupItem = React.createClass({
-  render: function() {
+class GroupItem extends React.Component {
+  render() {
     // set levels
     var levels = [];
-    this.props.group.players.forEach(function(player) {
+    this.props.group.players.forEach((player) => {
       levels.push(
         <span className="level-circle" key={player.id}>{player.level}</span>
       );
@@ -21,4 +21,4 @@ var GroupItem = React.createClass({
       </div>
     );
   }
-});
+}
