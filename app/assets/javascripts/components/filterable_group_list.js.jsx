@@ -19,10 +19,14 @@ class FilterableGroupList extends React.Component {
     this.loadGroups()
   }
 
+  handleFilter(filterdGroups) {
+    this.setState({groups: filteredGroups});
+  }
+
   render() {
     return (
       <div className="filterableGroupList">
-        <SearchBar />
+        <SearchBar onUserInput={this.handleFilter} groups={this.state.groups} />
         <GroupList groups={this.state.groups} />
       </div>
     )

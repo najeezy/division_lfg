@@ -3,21 +3,21 @@ class GroupsController < ApplicationController
     groups = [
       {
         id: 1,
-        missionName: 'Mission A',
+        missionName: 'Madison Field Hospital',
         time: '8:00AM',
         players: [{id: 1, level: 20}, {id: 2, level: 30}, {id: 3, level: 25}]
       },
       {
         id: 2,
-        missionName: 'Mission B',
+        missionName: 'Establish Base of Operations',
         time: '10:00AM',
-        players: [{id: 4, level: 14}, {id: 5, level: 32}, {id: 6, level: 55}]
+        players: [{id: 4, level: 14}, {id: 5, level: 18}, {id: 6, level: 20}]
       },
       {
         id: 3,
-        missionName: 'Mission C',
+        missionName: 'Darkzone Patrol',
         time: 'NOW',
-        players: [{id: 7, level: 13}, {id: 8, level: 3}, {id: 9, level: 6}]
+        players: [{id: 7, level: 8}, {id: 8, level: 3}, {id: 9, level: 6}]
       }
     ]
 
