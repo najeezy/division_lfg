@@ -14,14 +14,18 @@ class GroupItem extends React.Component {
     });
 
     return (
-      <div className="groupItem row">
+      <div className="groupItem col-md-12">
         <div className="col-md-7">
-          <h2>{this.props.group.missionName}</h2>
-          <p>{this.props.group.time}</p>
+          <h2>{this.props.group.mission_name}</h2>
+          <p>created by: {this.props.group.creator.username}</p>
         </div>
 
         <div className="level-list col-md-5">
           {levels}
+          <LevelCircle
+            key={this.props.group.creator.id}
+            level={this.props.group.creator.level}
+          />
         </div>
       </div>
     );

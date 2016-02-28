@@ -1,18 +1,28 @@
 class SearchBar extends React.Component {
-  handleUserInput() {
-    var filteredGroups = $.grep(this.props.groups, (group) => {
-      group.missionName.includes(event.target.value)
-    });
+  constructor(props) {
+    super(props)
+    this.handleUserInput = this.handleUserInput.bind(this);
+  }
 
-    this.props.onUserInput(filteredGroups);
+  handleUserInput() {
+    $.ajax({
+      url: '/groups',
+      dataType: 'json',
+      data: {q: this.refs.textInput.value},
+      success: (data) => {
+        this.props.onUserInput(data);
+      }
+    });
   }
 
   render() {
     return (
-      <div className="searchBar">
+      <div className="searchBar col-md-6 col-md-offset-1">
         <input
           type="text"
           placeholder="Search missions..."
+          className="col-md-12"
+          ref="textInput"
           onChange={this.handleUserInput}
         />
       </div>

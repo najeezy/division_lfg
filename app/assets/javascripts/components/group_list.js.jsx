@@ -8,7 +8,7 @@ class GroupList extends React.Component {
     });
 
     return (
-      <div className="groupList">
+      <div className="groupList col-md-12">
         {groupItems}
       </div>
     );

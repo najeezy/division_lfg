@@ -14,7 +14,16 @@
  *= require_self
  */
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: 'proxima nova';
+  background: #F9F9F9;
   letter-spacing: 1px;
+}
+
+.app {
+  background: #F9F9F9;
 }
