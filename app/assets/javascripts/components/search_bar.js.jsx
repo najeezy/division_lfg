@@ -17,7 +17,7 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <div className="searchBar col-md-6 col-md-offset-1">
+      <div className="searchBar">
         <input
           type="text"
           placeholder="Search missions..."
