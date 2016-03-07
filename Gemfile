@@ -39,6 +39,8 @@ gem 'react-rails', '~> 1.6.0'
 gem "sprockets"
 gem "sprockets-es6"
 
+gem "browserify-rails"
+
 # icons
 gem "font-awesome-rails"
 
