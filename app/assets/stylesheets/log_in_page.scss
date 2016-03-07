@@ -1,0 +1,16 @@
+.logInPage {
+  margin-top: 100px;
+
+  i {
+    &.fa-user, &.fa-lock {
+      padding: 0;
+      padding-top: 18px;
+      font-size: 18px;
+      color: lightgray;
+    }
+  }
+
+  button {
+    margin-top: 35px;
+  }
+}

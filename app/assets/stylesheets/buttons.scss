@@ -1,0 +1,13 @@
+button {
+  &.btn {
+    &.btn-success {
+      background-color: #A9E8A9;
+      border: none;
+
+      &:hover {
+        background-color: #7BE87F;
+        border: none;
+      }
+    }
+  }
+}

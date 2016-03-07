@@ -18,10 +18,18 @@ class AppComponent extends React.Component {
   }
 
   render() {
+    if (!App.currentUser) {
+      loginBox = (
+        <div>
+          <ActionLink title="Log In" href="#login" />
+        </div>
+      );
+    }
+
     return (
       <div className="appComponent">
         <div className="heading col-md-2">
-          <h1 className="col-md-12"><span>The</span>Division <span>LFG</span></h1>
+          <h1 className="col-md-12"><span>The</span>Division<span>LFG</span></h1>
           <div className="navigation col-md-12">
             <ul>
               <li><ActionLink title="Home" href="#groups" /></li>
@@ -32,6 +40,9 @@ class AppComponent extends React.Component {
         </div>
         <div className="col-md-8">
           {App.router(this.state.pathName)}
+        </div>
+        <div className="col-md-2">
+          {loginBox}
         </div>
       </div>
     );
