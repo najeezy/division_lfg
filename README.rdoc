@@ -6,8 +6,8 @@ An application allowing The Division players to group up to take on missions in 
 Current Tech:
 * Ruby on Rails
 * React
+* Redux
 * Postgresql
 
 Future Tech:
-* Redux
 * Websocket Rails
