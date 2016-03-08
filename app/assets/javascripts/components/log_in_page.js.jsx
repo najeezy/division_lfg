@@ -1,4 +1,4 @@
-class LogInPage extends React.Component {
+export default class LogInPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {loggedIn: false};
@@ -14,7 +14,6 @@ class LogInPage extends React.Component {
         password: this.refs.password.value
       },
       success(data) {
-        App.currentUser = true;
         this.setState({loggedIn: true});
         App.goto('#groups');
       }

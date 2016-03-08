@@ -1,4 +1,6 @@
-class GroupItem extends React.Component {
+import LevelCircle from './level_circle.js.jsx';
+
+export default class GroupItem extends React.Component {
   constructor(props) {
     super(props)
     this.state = {background: '#C7C7C6'}

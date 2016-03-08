@@ -1,4 +1,6 @@
-class GroupList extends React.Component {
+import GroupItem from './group_item.js.jsx';
+
+export default class GroupList extends React.Component {
   render() {
 
     // create group items

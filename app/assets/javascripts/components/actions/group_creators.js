@@ -1,3 +1,6 @@
+import fetch from 'isometric-fetch';
+import 'babel-polyfill';
+
 import {
   RECEIVE_GROUPS,
   REQUEST_GROUPS
@@ -14,4 +17,8 @@ export function requestGroups() {
   return {
     type: REQUEST_GROUPS
   }
+}
+
+export function fetchGroups() {
+  
 }

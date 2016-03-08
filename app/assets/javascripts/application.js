@@ -15,10 +15,10 @@
 //= require turbolinks
 //= require react
 //= require react_ujs
+//= require root_url
 //= require components
 
-//= require_tree .
-
 $(function() {
-  ReactDOM.render(<AppComponent />, document.getElementById('container'));
+  ReactDOM.render(React.createElement(AppComponent, null), document.getElementById('container'));
+  // ReactDOM.render(<AppComponent />, document.getElementById('container'));
 });

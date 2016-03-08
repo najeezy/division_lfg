@@ -1,4 +1,4 @@
-class ActionLink extends React.Component {
+export default class ActionLink extends React.Component {
   render() {
     return (
       <a href={this.props.href}>{this.props.title}</a>

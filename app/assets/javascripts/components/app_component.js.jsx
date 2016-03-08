@@ -1,4 +1,6 @@
-class AppComponent extends React.Component {
+import ActionLink from './action_link.js.jsx'
+
+export default class AppComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {pathName: window.location.hash};
@@ -18,14 +20,6 @@ class AppComponent extends React.Component {
   }
 
   render() {
-    if (!App.currentUser) {
-      loginBox = (
-        <div>
-          <ActionLink title="Log In" href="#login" />
-        </div>
-      );
-    }
-
     return (
       <div className="appComponent">
         <div className="heading col-md-2">
@@ -42,7 +36,6 @@ class AppComponent extends React.Component {
           {App.router(this.state.pathName)}
         </div>
         <div className="col-md-2">
-          {loginBox}
         </div>
       </div>
     );

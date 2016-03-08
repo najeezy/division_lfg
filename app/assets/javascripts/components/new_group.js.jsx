@@ -1,4 +1,4 @@
-class NewGroup extends React.Component {
+export default class NewGroup extends React.Component {
   constructor(props) {
     super(props)
     this.state = {mission_name: ''};

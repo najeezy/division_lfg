@@ -1,4 +1,4 @@
-class LevelCircle extends React.Component {
+export default class LevelCircle extends React.Component {
   constructor(props) {
     super(props)
     this.state = {color: '#B8BDBB'}

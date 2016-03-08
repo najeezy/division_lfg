@@ -1,4 +1,7 @@
-class FilterableGroupList extends React.Component {
+import SearchBar from './search_bar.js.jsx';
+import GroupList from './group_list.js.jsx';
+
+export default class FilterableGroupList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {groups: []}
