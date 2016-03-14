@@ -8,7 +8,11 @@ export default function entities(
 ) {
   switch (action.type) {
     case types.RECEIVE_GROUPS:
-      return normalize(action.items, arrayOf(group)).entities
+      if (action.items.length > 0) {
+        return normalize(action.items, arrayOf(group)).entities
+      } else {
+        return []
+      }
     default:
       return state;
   }

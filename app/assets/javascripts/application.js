@@ -19,6 +19,5 @@
 //= require components
 
 $(function() {
-  ReactDOM.render(React.createElement(AppComponent, null), document.getElementById('container'));
-  // ReactDOM.render(<AppComponent />, document.getElementById('container'));
+  ReactDOM.render(React.createElement(Root, null), document.getElementById('container'));
 });

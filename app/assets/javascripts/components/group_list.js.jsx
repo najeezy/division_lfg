@@ -1,18 +1,14 @@
 import GroupItem from './group_item.js.jsx';
 
-export default class GroupList extends React.Component {
-  render() {
+const GroupList = ({ groups }) => (
+  <div className="groupList col-md-12">
+    {groups.map((group) => (
+      <GroupItem
+        key={group.id}
+        {...group}
+      />
+    ))}
+  </div>
+);
 
-    // create group items
-    var groupItems = [];
-    this.props.groups.forEach((group) => {
-      groupItems.push(<GroupItem key={group.id} group={group} />);
-    });
-
-    return (
-      <div className="groupList col-md-12">
-        {groupItems}
-      </div>
-    );
-  }
-}
+export default GroupList;

@@ -1,4 +1,4 @@
-import fetch from 'isometric-fetch';
+import fetch from 'isomorphic-fetch';
 import 'babel-polyfill';
 
 import {
@@ -19,6 +19,19 @@ export function requestGroups() {
   }
 }
 
-export function fetchGroups() {
-  
+export function fetchGroups(query = null) {
+  return (dispatch) => {
+    dispatch(requestGroups())
+    let fetchArgs = null
+    const url = query ?
+      `${'http://localhost:3000'}/groups?q=${query}` :
+      `${'http://localhost:3000'}/groups`
+
+    return fetch(url)
+      .then((response) => {
+        return response.json()
+      }).then((responseData) => {
+        dispatch(receiveGroups(responseData))
+      }).catch(ex => console.log(ex))
+  };
 }
