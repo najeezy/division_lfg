@@ -1,5 +1,5 @@
 <% if Rails.env === 'development' %>
-  window.rootURL = 'http://localhost:3000';
+  window._rootURL = 'http://localhost:3000';
 <% else  %>
-  window.rootURL = '<%= ENV['ROOT_URL'] %>'
+  window._rootURL = '<%= ENV['ROOT_URL'] %>'
 <% end %>

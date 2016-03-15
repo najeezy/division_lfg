@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { fetchGroups } from './actions/group_creators.js'
+import { fetchGroups } from './actions/group_actions.js'
 
 let SearchBar = ({ dispatch }) => {
   let input

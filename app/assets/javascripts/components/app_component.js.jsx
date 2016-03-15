@@ -1,6 +1,8 @@
+import { connect } from 'react-redux'
 import ActionLink from './action_link.js.jsx'
+import UserSection from './containers/user_section.js'
 
-export default class AppComponent extends React.Component {
+class AppComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {pathName: window.location.hash};
@@ -36,8 +38,11 @@ export default class AppComponent extends React.Component {
           {App.router(this.state.pathName)}
         </div>
         <div className="col-md-2">
+          <UserSection />
         </div>
       </div>
     );
   }
 }
+
+export default AppComponent

@@ -1,6 +1,6 @@
 import expect from 'expect';
 import * as types from '../../app/assets/javascripts/components/actions/action_types.js';
-import * as creators from '../../app/assets/javascripts/components/actions/group_creators.js';
+import * as actions from '../../app/assets/javascripts/components/actions/group_actions.js';
 import { group1, group2, group3 } from '../factories/immutable_groups_with_associations.js';
 
 // async testing dependencies
@@ -19,7 +19,7 @@ describe('group action creators', () => {
     it('should create an action to receive groups', () => {
       const groups = [group1, group2];
       expect(
-        creators.receiveGroups(groups)
+        actions.receiveGroups(groups)
       ).toEqual({
         type: types.RECEIVE_GROUPS,
         items: groups
@@ -30,7 +30,7 @@ describe('group action creators', () => {
   describe('requestGroups', () => {
     it('should create an action for initiating a request for groups', () => {
       expect(
-        creators.requestGroups()
+        actions.requestGroups()
       ).toEqual({
         type: types.REQUEST_GROUPS
       });
@@ -52,7 +52,7 @@ describe('group action creators', () => {
           ];
 
           const store = mockStore({}, expectedActions, done);
-          store.dispatch(creators.fetchGroups());
+          store.dispatch(actions.fetchGroups());
         });
 
         it('adds a query string to body of request when passed query arguement', (done) => {
@@ -68,7 +68,7 @@ describe('group action creators', () => {
           ];
 
           const store = mockStore({}, expectedActions, done);
-          store.dispatch(creators.fetchGroups('some query'));
+          store.dispatch(actions.fetchGroups('some query'));
         })
       });
   });

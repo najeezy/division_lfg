@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import entitiesDenormalizer from '../helpers/entities_denormalizer.js';
 import SearchBar from './search_bar.js.jsx';
 import GroupList from './group_list.js.jsx';
-import { fetchGroups } from './actions/group_creators.js'
+import { fetchGroups } from './actions/group_actions.js'
 
 class FilterableGroupList extends React.Component {
   constructor(props) {
