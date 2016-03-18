@@ -1,4 +1,4 @@
-const UserLogin = ({ isFetching, invalidated, error, onLogin }) => {
+let UserLogin = ({ isFetching, invalidated, error, onLogin }) => {
   let emailInput
   let passwordInput
 
@@ -7,22 +7,27 @@ const UserLogin = ({ isFetching, invalidated, error, onLogin }) => {
 
   return (
     <div className="userLogin">
-      <button>
-        Sign Up
-      </button>
+      <a href="#signup">
+        <button className="btn btn-primary">
+          Sign Up
+        </button>
+      </a>
 
       {loginError}
       <input
         type="text"
         placeholder="Email"
         ref={(node) => emailInput = node}
+        className="form-control"
       />
       <input
         type="password"
         placeholder="Password"
         ref={(node) => passwordInput = node}
+        className="form-control"
       />
       <button
+        className="btn btn-success"
         onClick={() => onLogin(emailInput.value, passwordInput.value)}
       >
         {isFetching ? 'Loading...' : 'Log In'}

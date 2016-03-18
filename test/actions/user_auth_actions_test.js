@@ -131,7 +131,7 @@ describe('user auth action creators', () => {
 
     });
 
-    describe('fetchLogoutUser', () => {
+    describe('fetchLogoutUser', (done) => {
 
       it('creates REQUEST_USER and UNSET_USER when logging out user', (done) => {
         nock('http://localhost:3000/')
@@ -146,6 +146,67 @@ describe('user auth action creators', () => {
 
         const store = mockStore({}, expectedActions, done);
         store.dispatch(actions.fetchLogoutUser(1));
+      })
+    })
+
+    describe('fetchSignUpUser', (done) => {
+
+      it('creates REQUEST_USER and SET_USER when logging out user', (done) => {
+        const password_confirmation = password
+        const platform = 'someplatform'
+        const username = 'someusername'
+        const level = 30
+
+        nock('http://localhost:3000/')
+          .post('/users', {
+            user: {
+              email,
+              password,
+              password_confirmation,
+              player_attributes: { platform, username, level }
+            },
+          })
+          .query({ authenticity_token: global._token })
+          .reply(200, { success: true, user: { id, email } });
+
+        const expectedActions = [
+          { type: types.REQUEST_USER },
+          { type: types.SET_USER, id, email }
+        ];
+
+        const store = mockStore({}, expectedActions, done);
+        store.dispatch(actions.fetchSignUpUser(
+          email, password, password_confirmation, platform, username, level
+        ));
+      })
+
+      it('creates REQUEST_USER and SET_USER when logging out user', (done) => {
+        const password_confirmation = password
+        const platform = 'someplatform'
+        const username = 'someusername'
+        const level = 30
+
+        nock('http://localhost:3000/')
+          .post('/users', {
+            user: {
+              email,
+              password,
+              password_confirmation,
+              player_attributes: { platform, username, level }
+            },
+          })
+          .query({ authenticity_token: global._token })
+          .reply(200, { success: false, errors: ['some errors...'] });
+
+        const expectedActions = [
+          { type: types.REQUEST_USER },
+          { type: types.SET_USER, id, email }
+        ];
+
+        const store = mockStore({}, expectedActions, done);
+        store.dispatch(actions.fetchSignUpUser(
+          email, password, password_confirmation, platform, username, level
+        ));
       })
     })
   })

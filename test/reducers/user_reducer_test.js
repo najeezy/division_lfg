@@ -12,7 +12,7 @@ describe('userReducer', () => {
         email: null,
         isFetching: false,
         invalidated: false,
-        error: null
+        errors: null
       }
     )
   })

@@ -12,7 +12,7 @@ users = [
     password: 'abcd1234',
     password_confirmation: 'abcd1234',
     player: Player.create({
-      platform: 'Playstation Network',
+      platform: 'ps4',
       username: 'TruO_',
       level: 23,
       created_groups: Group.create([
@@ -25,7 +25,7 @@ users = [
     password: 'abcd1234',
     password_confirmation: 'abcd1234',
     player: Player.create({
-      platform: 'Playstation Network',
+      platform: 'ps4',
       username: 'Rinzer_',
       level: 25,
       created_groups: Group.create([
@@ -38,7 +38,7 @@ users = [
     password: 'abcd1234',
     password_confirmation: 'abcd1234',
     player: Player.create({
-      platform: 'Playstation Network',
+      platform: 'ps4',
       username: 'BalCuatro',
       level: 13,
       created_groups: Group.create([

@@ -3,6 +3,7 @@ const UserInfo = ({ id, email, onLogout }) => (
     <p>You are logged in:</p>
     <p>{email}</p>
     <button
+      className="btn btn-primary"
       onClick={() => onLogout(id) }
     >
       Logout

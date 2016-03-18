@@ -100,3 +100,42 @@ export function fetchLogoutUser(id) {
       .catch((ex) => console.log(ex))
   }
 }
+
+export function fetchSignUpUser(
+  email, password, password_confirmation, platform, username, level
+) {
+  return (dispatch) => {
+    dispatch(requestUser())
+
+    fetch(
+      `${_rootURL}/users?authenticity_token=${encodeURIComponent(_token)}`,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user: {
+            email,
+            password,
+            password_confirmation,
+            player_attributes: { platform, username, level }
+          },
+        }),
+        credentials: 'same-origin'
+      }
+    )
+      .then((response) => response.json())
+      .then((responseData) => {
+        if (responseData.success) {
+          const { id, email } = responseData.user
+          dispatch(setUser(id, email))
+          App.goto('#groups')
+        } else {
+          console.log(responseData.errors)
+        }
+      })
+      .catch((ex) => console.log(ex))
+  }
+}
