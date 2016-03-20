@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
+  get '/new_group' => 'home#index'
+  get '/signup'    => 'home#index'
 
   resources :sessions, only: [:index, :create, :destroy]
   resources :groups,   only: [:index, :create]

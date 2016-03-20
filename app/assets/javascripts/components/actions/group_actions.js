@@ -24,8 +24,8 @@ export function fetchGroups(query = null) {
     dispatch(requestGroups())
     let fetchArgs = null
     const url = query ?
-      `${'http://localhost:3000'}/groups?q=${query}` :
-      `${'http://localhost:3000'}/groups`
+      `${'http://localhost:3000'}/groups.json?q=${query}` :
+      `${'http://localhost:3000'}/groups.json`
 
     return fetch(url)
       .then((response) => {

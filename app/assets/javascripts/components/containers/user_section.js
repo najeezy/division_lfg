@@ -5,8 +5,12 @@ import UserInfo from '../components/user_info.js'
 import UserLogin from '../components/user_login.js'
 
 class UserSection extends Component {
+
   componentWillMount() {
-    this.props.dispatch(fetchUser())
+    const { id, dispatch } = this.props
+    if (!id) {
+      dispatch(fetchUser())
+    }
   }
 
   render() {

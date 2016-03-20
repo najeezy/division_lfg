@@ -1,0 +1,21 @@
+.navBar {
+  ul {
+    list-style: none;
+
+    li {
+      margin-bottom: 10px;
+
+      a {
+        color: gray;
+        border-radius: 5px;
+        padding: 5px;
+        text-decoration: none;
+
+        &:hover, &.active {
+          color: black;
+          background-color: lightgray;
+        }
+      }
+    }
+  }
+}

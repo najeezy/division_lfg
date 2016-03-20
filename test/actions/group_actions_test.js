@@ -1,3 +1,5 @@
+
+
 import expect from 'expect';
 import * as types from '../../app/assets/javascripts/components/actions/action_types.js';
 import * as actions from '../../app/assets/javascripts/components/actions/group_actions.js';
@@ -43,7 +45,7 @@ describe('group action creators', () => {
         it('creates REQUEST_GROUPS and RECEIVE_GROUPS when fetching groups', (done) => {
           const groups = [group1, group2];
           nock('http://localhost:3000/')
-            .get('/groups')
+            .get('/groups.json')
             .reply(200, groups);
 
           const expectedActions = [
@@ -58,7 +60,7 @@ describe('group action creators', () => {
         it('adds a query string to body of request when passed query arguement', (done) => {
           const groups = [group3];
           nock('http://localhost:3000/')
-            .get('/groups')
+            .get('/groups.json')
             .query({ q: 'some query' })
             .reply(200, groups);
 

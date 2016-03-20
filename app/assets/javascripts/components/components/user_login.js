@@ -1,3 +1,5 @@
+import { Link } from 'react-router'
+
 let UserLogin = ({ isFetching, invalidated, error, onLogin }) => {
   let emailInput
   let passwordInput
@@ -7,11 +9,11 @@ let UserLogin = ({ isFetching, invalidated, error, onLogin }) => {
 
   return (
     <div className="userLogin">
-      <a href="#signup">
+      <Link to="/signup">
         <button className="btn btn-primary">
           Sign Up
         </button>
-      </a>
+      </Link>
 
       {loginError}
       <input

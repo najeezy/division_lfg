@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
-import ActionLink from './action_link.js.jsx'
-import UserSection from './containers/user_section.js'
+import NavBar from './containers/nav_bar.js'
 
 class AppComponent extends React.Component {
   constructor(props) {
@@ -25,20 +24,10 @@ class AppComponent extends React.Component {
     return (
       <div className="appComponent">
         <div className="heading col-md-2">
-          <h1 className="col-md-12"><span>The</span>Division<span>LFG</span></h1>
-          <div className="navigation col-md-12">
-            <ul>
-              <li><ActionLink title="Home" href="#groups" /></li>
-              <li><ActionLink title="New Group" href="#new_group" /></li>
-              <li>My Groups</li>
-            </ul>
-          </div>
+          <NavBar />
         </div>
-        <div className="col-md-8">
-          {App.router(this.state.pathName)}
-        </div>
-        <div className="col-md-2">
-          <UserSection />
+        <div className="col-md-10">
+          {this.props.children}
         </div>
       </div>
     );

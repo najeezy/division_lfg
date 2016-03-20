@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import 'babel-polyfill'
+import { browserHistory } from 'react-router'
 import * as types from './action_types.js'
 
 export const requestUser = () => (
@@ -96,6 +97,7 @@ export function fetchLogoutUser(id) {
       .then((response) => response.json())
       .then((responseData) => {
         dispatch(unsetUser())
+        browserHistory.push('/')
       })
       .catch((ex) => console.log(ex))
   }
@@ -131,7 +133,7 @@ export function fetchSignUpUser(
         if (responseData.success) {
           const { id, email } = responseData.user
           dispatch(setUser(id, email))
-          App.goto('#groups')
+          browserHistory.push('/')
         } else {
           console.log(responseData.errors)
         }

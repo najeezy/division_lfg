@@ -8,6 +8,7 @@ const GroupItem = ({ id, mission_name, is_active, creator, players }) => (
     </div>
 
     <div className="level-list col-md-5">
+
       {players.map((player) => (
         <LevelCircle
           key={player.id}
