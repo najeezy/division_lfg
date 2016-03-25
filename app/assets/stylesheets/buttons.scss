@@ -5,6 +5,11 @@ button {
     margin: 20px 0;
     outline: none;
 
+    &.btn-basic {
+      background: none;
+      border: 1px solid gray;
+    }
+
     &.btn-primary {
       background-color: #65BADE;
 

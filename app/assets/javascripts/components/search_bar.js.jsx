@@ -8,7 +8,7 @@ let SearchBar = ({ dispatch }) => {
       <input
         type="text"
         placeholder="Search missions..."
-        className="col-md-12"
+        className="form-control"
         ref={node => input = node}
         onChange={() => {
           dispatch(fetchGroups(input.value))

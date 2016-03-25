@@ -48,6 +48,7 @@ export function fetchUser() {
           dispatch(setUser(id, email))
         } else {
           dispatch(unsetUser())
+          browserHistory.push('/')
         }
       })
       .catch((ex) => console.log(ex))

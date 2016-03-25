@@ -8,14 +8,15 @@ class GroupsController < ApplicationController
         redirect_to '/'
       end
       format.json {
-        render json: groups.as_json({ include: [:players, :creator] })
+        render json: groups.as_json(include: [:players, :creator])
       }
     end
   end
 
   def create
-    group = Group.new(group_params)
-    render json: :ok
+    new_group_params = group_params.merge(creator_id: current_user.id)
+    group = Group.create(new_group_params)
+    render json: group.as_json(include: [:players, :creator])
   end
 
   private

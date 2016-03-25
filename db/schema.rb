@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160228164625) do
+ActiveRecord::Schema.define(version: 20160321181814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "groups", force: :cascade do |t|
     t.string   "mission_name"
-    t.boolean  "is_active"
+    t.boolean  "is_active",    default: true
     t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -34,11 +34,12 @@ ActiveRecord::Schema.define(version: 20160228164625) do
 
   create_table "players", force: :cascade do |t|
     t.string   "platform"
-    t.string   "username",   null: false
+    t.string   "username",                   null: false
     t.integer  "level"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "has_mic",    default: false
   end
 
   create_table "users", force: :cascade do |t|

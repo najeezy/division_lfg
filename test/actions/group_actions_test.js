@@ -41,38 +41,55 @@ describe('group action creators', () => {
 
   describe('async actions', () => {
 
-      describe('fetchGroups', () => {
-        it('creates REQUEST_GROUPS and RECEIVE_GROUPS when fetching groups', (done) => {
-          const groups = [group1, group2];
-          nock('http://localhost:3000/')
-            .get('/groups.json')
-            .reply(200, groups);
+    describe('fetchGroups', () => {
+      it('creates REQUEST_GROUPS and RECEIVE_GROUPS when fetching groups', (done) => {
+        const groups = [group1, group2];
+        nock('http://localhost:3000/')
+          .get('/groups.json')
+          .reply(200, groups);
 
-          const expectedActions = [
-            { type: types.REQUEST_GROUPS },
-            { type: types.RECEIVE_GROUPS, items: groups }
-          ];
+        const expectedActions = [
+          { type: types.REQUEST_GROUPS },
+          { type: types.RECEIVE_GROUPS, items: groups }
+        ];
 
-          const store = mockStore({}, expectedActions, done);
-          store.dispatch(actions.fetchGroups());
-        });
-
-        it('adds a query string to body of request when passed query arguement', (done) => {
-          const groups = [group3];
-          nock('http://localhost:3000/')
-            .get('/groups.json')
-            .query({ q: 'some query' })
-            .reply(200, groups);
-
-          const expectedActions = [
-            { type: types.REQUEST_GROUPS },
-            { type: types.RECEIVE_GROUPS, items: groups }
-          ];
-
-          const store = mockStore({}, expectedActions, done);
-          store.dispatch(actions.fetchGroups('some query'));
-        })
+        const store = mockStore({}, expectedActions, done);
+        store.dispatch(actions.fetchGroups());
       });
-  });
 
-});
+      it('adds a query string to body of request when passed query arguement', (done) => {
+        const groups = [group3];
+        nock('http://localhost:3000/')
+          .get('/groups.json')
+          .query({ q: 'some query' })
+          .reply(200, groups);
+
+        const expectedActions = [
+          { type: types.REQUEST_GROUPS },
+          { type: types.RECEIVE_GROUPS, items: groups }
+        ];
+
+        const store = mockStore({}, expectedActions, done);
+        store.dispatch(actions.fetchGroups('some query'));
+      })
+    });
+
+    describe('fetchCreateGroup', () => {
+      it('creates REQUEST_GROUPS and RECEIVE_GROUPS when creating a group', (done) => {
+        const groups = [group3]
+        nock('http://localhost:3000/')
+          .post('/groups', { group: { mission_name: 'some_name' } })
+          .query({ authenticity_token: global._token })
+          .reply(200, groups)
+
+        const expectedActions = [
+          { type: types.REQUEST_GROUPS },
+          { type: types.RECEIVE_GROUPS, items: groups }
+        ]
+
+        const store = mockStore({}, expectedActions, done)
+        store.dispatch(actions.fetchCreateGroup({ mission_name: 'some_name' }))
+      })
+    })
+  })
+})

@@ -27,6 +27,12 @@
             border: 1px solid lightgray;
           }
         }
+
+        .fa-microphone {
+          &.inactive {
+            color: gray;
+          }
+        }
       }
 
       &:last-child {
@@ -64,6 +70,34 @@
             border-radius: 50px;
             text-align: center;
             font-size: 20px;
+          }
+        }
+      }
+
+      .fa-microphone {
+        font-size: 20px;
+
+        &.active {
+          color: green;
+        }
+
+        &.inactive {
+          color: lightgray;
+        }
+      }
+
+      .join-button-container {
+        padding: 0 30px 0 0;
+
+        .btn {
+          margin: 0;
+
+          &.btn-basic {
+
+            &:hover {
+              background: gray;
+              color: lightgray;
+            }
           }
         }
       }

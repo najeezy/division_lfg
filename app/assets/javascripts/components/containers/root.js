@@ -9,7 +9,7 @@ import configureStore from '../store/configure_store.js';
 // components
 import AppComponent from '../app_component.js.jsx';
 import GroupsPage from '../components/groups_page.js'
-import NewGroupPage from '../components/new_group_page.js'
+import NewGroupPage from '../containers/new_group_page.js'
 import SignUpPage from '../containers/sign_up_page.js'
 
 
