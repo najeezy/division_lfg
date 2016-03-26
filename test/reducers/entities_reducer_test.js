@@ -1,25 +1,16 @@
 import expect from 'expect';
 import reducer from '../../app/assets/javascripts/components/reducers/entities_reducer.js';
 import * as types from '../../app/assets/javascripts/components/actions/action_types.js'
-import GroupFactory from '../factories/group_factory.js';
-import PlayerFactory from '../factories/player_factory.js';
+import {
+  group1,
+  group2,
+  group3,
+  player1,
+  player2,
+  player3
+} from '../factories/immutable_groups_with_associations.js'
 
 describe('entities reducer', () => {
-  const group1 = GroupFactory();
-  const group2 = GroupFactory();
-  const group3 = GroupFactory();
-
-  const player1 = PlayerFactory();
-  const player2 = PlayerFactory();
-  const player3 = PlayerFactory();
-
-  // set the players and creators
-  group1.players = [player1];
-  group1.creator = player2;
-  group2.players = [player2];
-  group2.creator = player3;
-  group3.players = [player3];
-  group3.creator = player1;
 
   it('returns the initial state', () => {
     expect(
@@ -99,6 +90,51 @@ describe('entities reducer', () => {
         },
         players: {
           [player1.id]: player1, [player2.id]: player2, [player3.id]: player3
+        }
+      }
+    );
+  });
+
+  it('should handle JOIN_GROUP', () => {
+    expect(
+      reducer(
+        {
+          groups: {
+            [group1.id]: {
+              ...group1,
+              players: group1.players.map(player => player.id),
+              creator: group1.creator.id
+            },
+            [group2.id]: {
+              ...group2,
+              players: group2.players.map(player => player.id),
+              creator: group2.creator.id
+            }
+          },
+          players: {
+            [player1.id]: player1,
+            [player2.id]: player2
+          }
+        },
+        { type: types.JOIN_GROUP, groupId: group2.id, playerId: player1.id }
+      )
+    ).toEqual(
+      {
+        groups: {
+          [group1.id]: {
+            ...group1,
+            players: group1.players.map(player => player.id),
+            creator: group1.creator.id
+          },
+          [group2.id]: {
+            ...group2,
+            players: group2.players.map(player => player.id).concat([player1.id]),
+            creator: group2.creator.id
+          }
+        },
+        players: {
+          [player1.id]: player1,
+          [player2.id]: player2
         }
       }
     );

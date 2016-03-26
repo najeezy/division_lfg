@@ -1,6 +1,7 @@
 // groups
 export const REQUEST_GROUPS = 'REQUEST_GROUPS'
 export const RECEIVE_GROUPS = 'RECEIVE_GROUPS'
+export const JOIN_GROUP = 'JOIN_GROUP'
 
 // User
 export const REQUEST_USER = 'REQUEST_USER'

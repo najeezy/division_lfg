@@ -10,6 +10,10 @@ describe('actions types', () => {
     expect(types.REQUEST_GROUPS).toEqual('REQUEST_GROUPS')
   })
 
+  it('has set JOIN_GROUP', () => {
+    expect(types.JOIN_GROUP).toEqual('JOIN_GROUP')
+  })
+
   it('has set REQUEST_USER', () => {
     expect(types.REQUEST_USER).toEqual('REQUEST_USER')
   })

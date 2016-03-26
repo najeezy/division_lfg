@@ -1,5 +1,5 @@
-import fetch from 'isomorphic-fetch'
 import 'babel-polyfill'
+import fetch from 'isomorphic-fetch'
 import { browserHistory } from 'react-router'
 import * as types from './action_types.js'
 

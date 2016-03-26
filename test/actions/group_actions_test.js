@@ -39,6 +39,18 @@ describe('group action creators', () => {
     });
   });
 
+  describe('joinGroup', () => {
+    it('should create an action for initiating a request for groups', () => {
+      expect(
+        actions.joinGroup(1, 2)
+      ).toEqual({
+        type: types.JOIN_GROUP,
+        groupId: 1,
+        playerId: 2
+      });
+    });
+  });
+
   describe('async actions', () => {
 
     describe('fetchGroups', () => {
@@ -89,6 +101,23 @@ describe('group action creators', () => {
 
         const store = mockStore({}, expectedActions, done)
         store.dispatch(actions.fetchCreateGroup({ mission_name: 'some_name' }))
+      })
+    })
+
+    describe('fetchJoinGroup', () => {
+      it('creates REQUEST_GROUPS and RECEIVE_GROUPS when creating a group', (done) => {
+        nock('http://localhost:3000/')
+          .put('/groups/1/join')
+          .query({ authenticity_token: global._token })
+          .reply(200, { group_id: 1, player_id: 2 })
+
+        const expectedActions = [
+          { type: types.REQUEST_GROUPS },
+          { type: types.JOIN_GROUP, groupId: 1, playerId: 2 }
+        ]
+
+        const store = mockStore({}, expectedActions, done)
+        store.dispatch(actions.fetchJoinGroup(1))
       })
     })
   })

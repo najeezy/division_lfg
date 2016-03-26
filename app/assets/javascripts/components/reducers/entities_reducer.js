@@ -14,6 +14,13 @@ export default function entities(
       } else {
         return state
       }
+    case types.JOIN_GROUP:
+      const { playerId, groupId } = action
+      let groups = { ...state.groups }
+      groups[groupId].players.push(playerId)
+      let new_state = { ...state, groups }
+      debugger
+      return new_state
     default:
       return state;
   }

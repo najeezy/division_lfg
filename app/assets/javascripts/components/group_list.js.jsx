@@ -1,12 +1,9 @@
 import GroupItem from './group_item.js.jsx';
 
-const GroupList = ({ groups }) => (
+const GroupList = ({ groups, isLoggedIn, onJoin }) => (
   <div className="groupList col-md-12">
     {groups.map((group) => (
-      <GroupItem
-        key={group.id}
-        {...group}
-      />
+      <GroupItem {...{ ...group, isLoggedIn, onJoin, key: group.id }} />
     ))}
   </div>
 );

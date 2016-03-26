@@ -11,3 +11,29 @@ export default function configureStore() {
     )
   )
 }
+
+// possible redux state
+// {
+//   entities: {
+//     groups: {},
+//     players: {}
+//   },
+//
+//   groups: {
+//     items: []
+//   },
+//
+//   user: {
+//     id: null,
+//     email: null
+//   },
+//
+//   fetchStates: [
+//     {
+//       fetchType: 'TYPE',
+//       complete: false,
+//       success: true,
+//       errors: []
+//     }
+//   ]
+// }

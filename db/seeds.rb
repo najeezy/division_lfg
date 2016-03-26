@@ -9,12 +9,13 @@
 users = [
   {
     email: 'najee_gardner@me.com',
-    password: 'abcd1234',
-    password_confirmation: 'abcd1234',
+    password: 'Abcd1234',
+    password_confirmation: 'Abcd1234',
     player: Player.create({
       platform: 'ps4',
       username: 'TruO_',
       level: 23,
+      has_mic: true,
       created_groups: Group.create([
         { mission_name: 'Madision Square Hospital', is_active: true }
       ])
@@ -22,12 +23,13 @@ users = [
   },
   {
     email: 'tatirobinson@gmail.com',
-    password: 'abcd1234',
-    password_confirmation: 'abcd1234',
+    password: 'Abcd1234',
+    password_confirmation: 'Abcd1234',
     player: Player.create({
       platform: 'ps4',
       username: 'Rinzer_',
       level: 25,
+      has_mic: true,
       created_groups: Group.create([
         { mission_name: 'Darkzone Patrol', is_active: true }
       ])
@@ -35,12 +37,13 @@ users = [
   },
   {
     email: 'ebalfour@gmail.com',
-    password: 'abcd1234',
-    password_confirmation: 'abcd1234',
+    password: 'Abcd1234',
+    password_confirmation: 'Abcd1234',
     player: Player.create({
       platform: 'ps4',
       username: 'BalCuatro',
       level: 13,
+      has_mic: false,
       created_groups: Group.create([
         { mission_name: 'Base of Ops', is_active: true }
       ])
@@ -49,6 +52,7 @@ users = [
 ]
 
 User.create(users)
+
 first_group = Group.first
 last_group = Group.last
 

@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   get '/signup'    => 'home#index'
 
   resources :sessions, only: [:index, :create, :destroy]
-  resources :groups,   only: [:index, :create]
+  resources :groups,   only: [:index, :create] do
+    member do
+      put 'join' => 'groups#join'
+    end
+  end
   resources :users,    only: [:create]
 
   # Example of regular route:

@@ -19,6 +19,20 @@ class GroupsController < ApplicationController
     render json: group.as_json(include: [:players, :creator])
   end
 
+  def join
+    group = Group.find_by(id: params[:id])
+    if group && group.players.count <= 2
+      group.players << current_user.player
+      render json: {
+        success: true,
+        group_id: group.id,
+        player_id: current_user.player.id
+      }
+    else
+      render json: { success: false }
+    end
+  end
+
   private
 
   def group_params
