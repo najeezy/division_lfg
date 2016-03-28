@@ -1,5 +1,4 @@
-import 'babel-polyfill'
-import fetch from 'isomorphic-fetch'
+import apiCall from '../../helpers/api_call.js'
 import { browserHistory } from 'react-router'
 import * as types from './action_types.js'
 
@@ -34,24 +33,18 @@ export function fetchUser() {
   return (dispatch) => {
     dispatch(requestUser())
 
-    fetch(
-      `${_rootURL}/sessions`,
-      {
-        method: 'GET',
-        credentials: 'same-origin'
-      }
-    )
-      .then((response) => response.json())
-      .then((responseData) => {
-        if (responseData.user) {
-          const { id, email } = responseData.user
+    return apiCall({
+      url: `${_rootURL}/sessions`,
+      success: (data) => {
+        if (data.user) {
+          const { id, email } = data.user
           dispatch(setUser(id, email))
         } else {
           dispatch(unsetUser())
           browserHistory.push('/')
         }
-      })
-      .catch((ex) => console.log(ex))
+      }
+    })
   }
 }
 
@@ -59,28 +52,19 @@ export function fetchLoginUser(email, password) {
   return (dispatch) => {
     dispatch(requestUser())
 
-    fetch(
-      `${_rootURL}/sessions?authenticity_token=${encodeURIComponent(_token)}`,
-      {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email: email, password: password }),
-        credentials: 'same-origin'
-      }
-    )
-      .then((response) => response.json())
-      .then((responseData) => {
-        if (responseData.success) {
-          let { id, email } = responseData.user
+    return apiCall({
+      url: `${_rootURL}/sessions`,
+      type: 'POST',
+      data: { email, password },
+      success: (data) => {
+        if (data.success) {
+          const { id, email } = data.user
           dispatch(setUser(id, email))
         } else {
-          dispatch(invalidateUser(responseData.error))
+          dispatch(invalidateUser(data.error))
         }
-      })
-      .catch((ex) => console.log(ex))
+      }
+    })
   }
 }
 
@@ -88,19 +72,14 @@ export function fetchLogoutUser(id) {
   return (dispatch) => {
     dispatch(requestUser())
 
-    fetch(
-      `${_rootURL}/sessions/${id}?authenticity_token=${encodeURIComponent(_token)}`,
-      {
-        method: 'DELETE',
-        credentials: 'same-origin'
-      }
-    )
-      .then((response) => response.json())
-      .then((responseData) => {
+    return apiCall({
+      url: `${_rootURL}/sessions/${id}`,
+      type: 'DELETE',
+      success: (data) => {
         dispatch(unsetUser())
         browserHistory.push('/')
-      })
-      .catch((ex) => console.log(ex))
+      }
+    })
   }
 }
 
@@ -110,35 +89,26 @@ export function fetchSignUpUser(
   return (dispatch) => {
     dispatch(requestUser())
 
-    fetch(
-      `${_rootURL}/users?authenticity_token=${encodeURIComponent(_token)}`,
-      {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          user: {
-            email,
-            password,
-            password_confirmation,
-            player_attributes: { platform, username, level }
-          },
-        }),
-        credentials: 'same-origin'
-      }
-    )
-      .then((response) => response.json())
-      .then((responseData) => {
-        if (responseData.success) {
-          const { id, email } = responseData.user
+    return apiCall({
+      url: `${_rootURL}/users`,
+      type: 'POST',
+      data: {
+        user: {
+          email, password, password_confirmation,
+          player_attributes: {
+            platform, username, level
+          }
+        }
+      },
+      success: (data) => {
+        if (data.success) {
+          const { id, email } = data.user
           dispatch(setUser(id, email))
           browserHistory.push('/')
         } else {
-          console.log(responseData.errors)
+          console.log(data.errors)
         }
-      })
-      .catch((ex) => console.log(ex))
+      }
+    })
   }
 }

@@ -1,6 +1,5 @@
 import { browserHistory } from 'react-router'
-import 'babel-polyfill'
-import fetch from 'isomorphic-fetch'
+import apiCall from '../../helpers/api_call.js'
 
 import {
   RECEIVE_GROUPS,
@@ -37,39 +36,27 @@ export function fetchGroups(query = null) {
       `${_rootURL}/groups.json?q=${query}` :
       `${_rootURL}/groups.json`
 
-    return fetch(url)
-      .then((response) => {
-        return response.json()
-      }).then((responseData) => {
-        dispatch(receiveGroups(responseData))
-      }).catch(ex => console.log(ex))
+    return apiCall({
+      url,
+      success: (data) => dispatch(receiveGroups(data))
+    })
   }
 }
 
 export function fetchCreateGroup(group_params) {
   return (dispatch) => {
     dispatch(requestGroups())
-    let fetchArgs = null
 
-    return fetch(
-      `${_rootURL}/groups?authenticity_token=${encodeURIComponent(_token)}`,
-      {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ group: group_params }),
-        credentials: 'same-origin'
-      }
-    )
-      .then((response) => {
-        return response.json()
-      }).then((responseData) => {
-        dispatch(receiveGroups(responseData))
+    return apiCall({
+      url: `${_rootURL}/groups`,
+      type: 'POST',
+      data: { group: group_params },
+      success: (data) => {
+        dispatch(receiveGroups(data))
         browserHistory.push('/')
-      }).catch(ex => console.log(ex))
-  };
+      }
+    })
+  }
 }
 
 export function fetchJoinGroup(groupId) {
@@ -77,21 +64,14 @@ export function fetchJoinGroup(groupId) {
     dispatch(requestGroups())
     let fetchArgs = null
 
-    return fetch(
-      `${_rootURL}/groups/${groupId}/join?authenticity_token=${encodeURIComponent(_token)}`,
-      {
-        method: 'PUT',
-        credentials: 'same-origin'
-      }
-    )
-      .then((response) => {
-        return response.json()
-      }).then((responseData) => {
-        dispatch(joinGroup(
-          responseData.group_id,
-          responseData.player_id
-        ))
+
+    return apiCall({
+      url: `${_rootURL}/groups/${groupId}/join`,
+      type: 'PUT',
+      success: (data) => {
+        dispatch(joinGroup(data.group_id, data.player_id))
         browserHistory.push('/')
-      }).catch(ex => console.log(ex))
+      }
+    })
   };
 }
