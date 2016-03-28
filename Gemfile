@@ -50,6 +50,9 @@ group :development, :test do
   gem 'pry-rails'
   gem 'dotenv-rails'
 
+  # Faking database data
+  gem 'faker'
+
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
