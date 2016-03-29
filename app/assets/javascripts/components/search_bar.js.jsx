@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { fetchGroups } from './actions/group_actions.js'
+import { fetchSearchGroups, setGroupQuery } from './actions/group_actions.js'
 
 let SearchBar = ({ dispatch }) => {
   let input
@@ -11,7 +11,8 @@ let SearchBar = ({ dispatch }) => {
         className="form-control"
         ref={node => input = node}
         onChange={() => {
-          dispatch(fetchGroups(input.value))
+          dispatch(setGroupQuery(input.value))
+          dispatch(fetchSearchGroups(input.value))
         }}
       />
     </div>

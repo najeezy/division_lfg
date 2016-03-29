@@ -1,44 +1,72 @@
 import { browserHistory } from 'react-router'
 import apiCall from '../../helpers/api_call.js'
-
-import {
-  RECEIVE_GROUPS,
-  REQUEST_GROUPS,
-  JOIN_GROUP
-} from './action_types.js'
+import * as types from './action_types.js'
 
 export function receiveGroups(items) {
   return {
-    type: RECEIVE_GROUPS,
+    type: types.RECEIVE_GROUPS,
+    items
+  }
+}
+
+export function replaceGroups(items) {
+  return {
+    type: types.REPLACE_GROUPS,
     items
   }
 }
 
 export function requestGroups() {
   return {
-    type: REQUEST_GROUPS
+    type: types.REQUEST_GROUPS
+  }
+}
+
+export function setGroupQuery(query) {
+  return {
+    type: types.SET_GROUP_QUERY,
+    query
+  }
+}
+
+export function incrementGroupsPage() {
+  return {
+    type: types.INCREMENT_GROUPS_PAGE
   }
 }
 
 export function joinGroup(groupId, playerId) {
   return {
-    type: JOIN_GROUP,
+    type: types.JOIN_GROUP,
     groupId,
     playerId
   }
 }
 
-export function fetchGroups(query = null) {
+export function fetchNextGroups(query, nextPage) {
   return (dispatch) => {
     dispatch(requestGroups())
-    let fetchArgs = null
+
+    return apiCall({
+      url: `${_rootURL}/groups.json?q=${query}&page=${nextPage}`,
+      success: (data) => {
+        dispatch(incrementGroupsPage())
+        dispatch(receiveGroups(data))
+      }
+    })
+  }
+}
+
+export function fetchSearchGroups(query = null) {
+  return (dispatch) => {
+    dispatch(requestGroups())
     const url = query ?
       `${_rootURL}/groups.json?q=${query}` :
       `${_rootURL}/groups.json`
 
     return apiCall({
       url,
-      success: (data) => dispatch(receiveGroups(data))
+      success: (data) => dispatch(replaceGroups(data))
     })
   }
 }

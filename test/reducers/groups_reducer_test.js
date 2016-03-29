@@ -12,6 +12,8 @@ describe('groups reducer', () => {
       reducer(undefined, {})
     ).toEqual({
       isFetching: false,
+      query: '',
+      page: 1,
       items: []
     });
   });
@@ -23,6 +25,8 @@ describe('groups reducer', () => {
       reducer(
         {
           isFetching: true,
+          query: '',
+          page: 1,
           items: []
         },
         {
@@ -33,15 +37,19 @@ describe('groups reducer', () => {
     ).toEqual(
       {
         isFetching: false,
+        query: '',
+        page: 1,
         items: [group1.id, group2.id, group3.id]
       }
-    );
+    )
 
     // testing with initial groups
     expect(
       reducer(
         {
           isFetching: true,
+          query: '',
+          page: 1,
           items: [group1.id, group2.id]
         },
         {
@@ -52,6 +60,32 @@ describe('groups reducer', () => {
     ).toEqual(
       {
         isFetching: false,
+        query: '',
+        page: 1,
+        items: [group1.id, group2.id, group3.id]
+      }
+    )
+  })
+
+  it('should handle REPLACE_GROUPS', () => {
+    expect(
+      reducer(
+        {
+          isFetching: true,
+          query: '',
+          page: 1,
+          items: [group1.id, group2.id]
+        },
+        {
+          type: 'REPLACE_GROUPS',
+          items: [group3]
+        }
+      )
+    ).toEqual(
+      {
+        isFetching: false,
+        query: '',
+        page: 1,
         items: [group3.id]
       }
     );
@@ -64,6 +98,8 @@ describe('groups reducer', () => {
       reducer(
         {
           isFetching: false,
+          query: '',
+          page: 1,
           items: []
         },
         {
@@ -74,6 +110,8 @@ describe('groups reducer', () => {
     ).toEqual(
       {
         isFetching: true,
+        query: '',
+        page: 1,
         items: []
       }
     );
@@ -83,6 +121,8 @@ describe('groups reducer', () => {
       reducer(
         {
           isFetching: false,
+          query: '',
+          page: 1,
           items: [group1.id, group2.id]
         },
         {
@@ -93,8 +133,57 @@ describe('groups reducer', () => {
     ).toEqual(
       {
         isFetching: true,
+        query: '',
+        page: 1,
         items: [group1.id, group2.id]
       }
     );
   });
-});
+
+  it('should handle SET_GROUP_QUERY', () => {
+    expect(
+      reducer(
+        {
+          isFetching: false,
+          query: '',
+          page: 1,
+          items: [],
+        },
+        {
+          type: 'SET_GROUP_QUERY',
+          query: 'some query'
+        }
+      )
+    ).toEqual(
+      {
+        isFetching: false,
+        query: 'some query',
+        page: 1,
+        items: []
+      }
+    )
+  })
+
+  it('should handle INCREMENT_GROUPS_PAGE', () => {
+    expect(
+      reducer(
+        {
+          isFetching: false,
+          query: '',
+          page: 1,
+          items: [],
+        },
+        {
+          type: 'INCREMENT_GROUPS_PAGE'
+        }
+      )
+    ).toEqual(
+      {
+        isFetching: false,
+        query: '',
+        page: 2,
+        items: []
+      }
+    )
+  })
+})

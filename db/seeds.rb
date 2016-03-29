@@ -82,7 +82,7 @@ def fake_user_data
   }
 end
 
-fake_users = (1..30).to_a.map { |num| fake_user_data }
+fake_users = (1..100).to_a.map { |num| fake_user_data }
 
 User.create(users + fake_users)
 

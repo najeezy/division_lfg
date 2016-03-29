@@ -8,6 +8,7 @@ export default function entities(
   action
 ) {
   switch (action.type) {
+    case types.REPLACE_GROUPS:
     case types.RECEIVE_GROUPS:
       if (action.items.length > 0) {
         return merge(state, normalize(action.items, arrayOf(group)).entities)
@@ -19,7 +20,6 @@ export default function entities(
       let groups = { ...state.groups }
       groups[groupId].players.push(playerId)
       let new_state = { ...state, groups }
-      debugger
       return new_state
     default:
       return state;

@@ -1,7 +1,10 @@
 // groups
 export const REQUEST_GROUPS = 'REQUEST_GROUPS'
 export const RECEIVE_GROUPS = 'RECEIVE_GROUPS'
+export const REPLACE_GROUPS = 'REPLACE_GROUPS'
+export const SET_GROUP_QUERY = 'SET_GROUP_QUERY'
 export const JOIN_GROUP = 'JOIN_GROUP'
+export const INCREMENT_GROUPS_PAGE = 'INCREMENT_GROUPS_PAGE'
 
 // User
 export const REQUEST_USER = 'REQUEST_USER'
