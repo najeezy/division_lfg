@@ -21,15 +21,18 @@ class GroupsController < ApplicationController
 
   def join
     group = Group.find_by(id: params[:id])
-    if group && group.players.count <= 2
-      group.players << current_user.player
+
+    if group.add_player(current_user.player)
       render json: {
         success: true,
         group_id: group.id,
         player_id: current_user.player.id
       }
     else
-      render json: { success: false }
+      render json: {
+        success: false,
+        errors: group.errors.full_messages
+      }
     end
   end
 
