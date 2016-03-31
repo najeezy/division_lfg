@@ -64,6 +64,12 @@
           border: 1px solid white;
           margin-left: -20px;
 
+          @media screen and (max-width: 1044px) {
+            height: 60px;
+            width: 60px;
+            line-height: 60px;
+          }
+
           &:last-child {
             height: 100px;
             width: 100px;
@@ -71,6 +77,12 @@
             border-radius: 50px;
             text-align: center;
             font-size: 20px;
+
+            @media screen and (max-width: 1044px) {
+              height: 85px;
+              width: 85px;
+              line-height: 85px;
+            }
           }
         }
       }

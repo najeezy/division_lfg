@@ -10,7 +10,7 @@ const GroupItem = ({
 
   return (
     <div className="groupItem col-md-12">
-      <div className="col-md-8">
+      <div className="col-md-6">
 
         <h2>{mission_name}</h2>
         <p>created by: {creator.username}</p>
@@ -34,20 +34,20 @@ const GroupItem = ({
 
           {/* creator mic */}
           <i key={creator.id} className={micClass(creator.has_mic)}></i>
-          </div>
-        </div>
-
-        <div className="level-list col-md-4">
-
-          {/* player level circles */}
-          {players.map((player) => (
-            <LevelCircle key={player.id} level={player.level} />
-          ))}
-
-          {/* creator level circle */}
-          <LevelCircle key={creator.id} level={creator.level} />
         </div>
       </div>
+
+      <div className="level-list col-md-6">
+
+        {/* player level circles */}
+        {players.map((player) => (
+          <LevelCircle key={player.id} level={player.level} />
+        ))}
+
+        {/* creator level circle */}
+        <LevelCircle key={creator.id} level={creator.level} />
+      </div>
+    </div>
   )
 }
 
