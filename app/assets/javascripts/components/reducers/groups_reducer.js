@@ -21,7 +21,7 @@ export default function groups(
       return { ...state, isFetching: true };
 
     case types.SET_GROUP_QUERY:
-      return { ...state, query: action.query }
+      return { ...state, page: 1, query: action.query }
 
     case types.INCREMENT_GROUPS_PAGE:
       return { ...state, page: state.page + 1 }

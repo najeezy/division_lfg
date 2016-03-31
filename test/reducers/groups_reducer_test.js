@@ -146,7 +146,7 @@ describe('groups reducer', () => {
         {
           isFetching: false,
           query: '',
-          page: 1,
+          page: 2,
           items: [],
         },
         {
