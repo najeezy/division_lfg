@@ -12,7 +12,7 @@ import GroupsPage from '../components/groups_page.js'
 import NewGroupPage from '../containers/new_group_page.js'
 import SignUpPage from '../containers/sign_up_page.js'
 
-
+// store
 const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
 

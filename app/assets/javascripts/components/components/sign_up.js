@@ -64,14 +64,17 @@ class SignUp extends Component {
 
           <button
             className="btn btn-success"
-            onClick={() => onSignUp(
-              emailInput.value,
-              passwordInput.value,
-              passwordConfirmationInput.value,
-              platformSelect.value,
-              usernameInput.value,
-              levelInput.value
-            ) }
+            onClick={(e) => {
+              e.preventDefault()
+              onSignUp(
+                emailInput.value,
+                passwordInput.value,
+                passwordConfirmationInput.value,
+                platformSelect.value,
+                usernameInput.value,
+                levelInput.value
+              )
+            }}
           >
             Create Account
           </button>
