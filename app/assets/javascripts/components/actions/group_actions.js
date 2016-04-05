@@ -1,5 +1,6 @@
 import { browserHistory } from 'react-router'
 import apiCall from '../../helpers/api_call.js'
+import { addErrorsOnTimer } from './error_actions.js'
 import * as types from './action_types.js'
 
 export function receiveGroups(items) {
@@ -90,15 +91,17 @@ export function fetchCreateGroup(group_params) {
 export function fetchJoinGroup(groupId) {
   return (dispatch) => {
     dispatch(requestGroups())
-    let fetchArgs = null
-
 
     return apiCall({
       url: `${_rootURL}/groups/${groupId}/join`,
       type: 'PUT',
       success: (data) => {
-        dispatch(joinGroup(data.group_id, data.player_id))
-        browserHistory.push('/')
+        if (data.success) {
+          dispatch(joinGroup(data.group_id, data.player_id))
+          browserHistory.push('/')
+        } else {
+          dispatch(addErrorsOnTimer(data.errors))
+        }
       }
     })
   };

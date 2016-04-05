@@ -114,15 +114,15 @@ describe('user auth action creators', () => {
         store.dispatch(actions.fetchLoginUser(email, password));
       });
 
-      it('creates REQUEST_USER and INVALIDATE_USER when logging in user fails', (done) => {
+      it('creates REQUEST_USER and ADD_ERRORS when logging in user fails', (done) => {
         nock('http://localhost:3000/')
           .post('/sessions', { email, password })
           .query({ authenticity_token: global._token })
-          .reply(200, { success: false, error: 'some error' });
+          .reply(200, { success: false, errors: ['some error'] });
 
         const expectedActions = [
           { type: types.REQUEST_USER },
-          { type: types.INVALIDATE_USER, error: 'some error' }
+          { type: types.ADD_ERRORS, errors: ['some error'] }
         ];
 
         const store = mockStore({}, expectedActions, done);

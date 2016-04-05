@@ -1,6 +1,7 @@
 import apiCall from '../../helpers/api_call.js'
 import { browserHistory } from 'react-router'
 import * as types from './action_types.js'
+import { addErrorsOnTimer } from './error_actions.js'
 
 export const requestUser = () => (
   {
@@ -61,7 +62,7 @@ export function fetchLoginUser(email, password) {
           const { id, email } = data.user
           dispatch(setUser(id, email))
         } else {
-          dispatch(invalidateUser(data.error))
+          dispatch(addErrorsOnTimer(data.errors))
         }
       }
     })

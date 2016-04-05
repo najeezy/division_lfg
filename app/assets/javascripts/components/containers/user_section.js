@@ -1,8 +1,10 @@
 import { connect } from 'react-redux'
 import { Component } from 'react'
 import { fetchUser, fetchLoginUser, fetchLogoutUser } from '../actions/user_auth_actions.js'
+import { addErrorsOnTimer } from '../actions/error_actions.js'
 import UserInfo from '../components/user_info.js'
 import UserLogin from '../components/user_login.js'
+import { validateEmail } from '../../helpers/validators.js'
 
 class UserSection extends Component {
 
@@ -49,7 +51,13 @@ UserSection = connect(
     return { id, email, isFetching, invalidated, error }
   },
   (dispatch) => ({
-    onLogin: (email, password) => dispatch(fetchLoginUser(email, password)),
+    onLogin: (email, password) => {
+      if (validateEmail(email)) {
+        dispatch(fetchLoginUser(email, password))
+      } else {
+        dispatch(addErrorsOnTimer(['Email is incorrect.']))
+      }
+    },
     onLogout: (id) => dispatch(fetchLogoutUser(id)),
     dispatch: dispatch
    })

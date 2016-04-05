@@ -7,3 +7,5 @@ global.browserHistory = {
 global.App = {
   goto: () => {}
 }
+
+global.$ = () => ( { fadeIn: () => {}, fadeOut: () => {} } )

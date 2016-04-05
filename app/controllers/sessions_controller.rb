@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       session[:current_user_id] = user.id
       render json: { success: true, user: user.as_json(only: [:id, :email]) }
     else
-      render json: { success: false, error: "Incorrect email or password." }
+      render json: { success: false, errors: ["Incorrect email or password."] }
     end
   end
 

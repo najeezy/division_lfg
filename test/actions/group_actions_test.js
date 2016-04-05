@@ -153,15 +153,30 @@ describe('group action creators', () => {
     })
 
     describe('fetchJoinGroup', () => {
-      it('creates REQUEST_GROUPS and RECEIVE_GROUPS when creating a group', (done) => {
+      it('creates REQUEST_GROUPS and JOIN_GROUP when joining a group successfully', (done) => {
         nock('http://localhost:3000/')
           .put('/groups/1/join')
           .query({ authenticity_token: global._token })
-          .reply(200, { group_id: 1, player_id: 2 })
+          .reply(200, { success: true, group_id: 1, player_id: 2 })
 
         const expectedActions = [
           { type: types.REQUEST_GROUPS },
           { type: types.JOIN_GROUP, groupId: 1, playerId: 2 }
+        ]
+
+        const store = mockStore({}, expectedActions, done)
+        store.dispatch(actions.fetchJoinGroup(1))
+      })
+
+      it('creates REQUEST_GROUPS and JOIN_GROUP when joining a group is not successful', (done) => {
+        nock('http://localhost:3000/')
+          .put('/groups/1/join')
+          .query({ authenticity_token: global._token })
+          .reply(200, { success: false, errors: ['some error'] })
+
+        const expectedActions = [
+          { type: types.REQUEST_GROUPS },
+          { type: types.ADD_ERRORS, errors: ['some error'] }
         ]
 
         const store = mockStore({}, expectedActions, done)

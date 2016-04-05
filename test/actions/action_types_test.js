@@ -41,4 +41,12 @@ describe('actions types', () => {
   it('has set UNSET_USER', () => {
     expect(types.UNSET_USER).toEqual('UNSET_USER')
   })
+
+  it('has set ADD_ERRORS', () => {
+    expect(types.ADD_ERRORS).toEqual('ADD_ERRORS')
+  })
+
+  it('has set CLEAR_ERRORS', () => {
+    expect(types.CLEAR_ERRORS).toEqual('CLEAR_ERRORS')
+  })
 })
