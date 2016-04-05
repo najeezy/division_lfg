@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
 
   def index
-    groups = Group.search(params['q'], params['page'])
+    groups = Group.search(params['q'], params['page'], current_user.player)
 
     respond_to do |format|
       format.html do

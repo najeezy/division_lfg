@@ -6,17 +6,25 @@ class Group < ActiveRecord::Base
 
   @@pagination_limit = 20
 
-  def self.search(query, page)
+  def self.search(query, page, current_player)
     page = (page || 1).to_i
     additional_sql = !query.blank? ?
-      " AND LOWER(mission_name) LIKE '%#{query.downcase}%'" :
+      "AND LOWER(groups.mission_name) LIKE '%#{query.downcase}%'" :
       ""
 
     Group
-      .where("is_active IS true#{additional_sql}")
-      .order(created_at: :desc)
+      .joins("LEFT JOIN groups_players ON groups_players.group_id = groups.id")
+      .group("groups.id")
+      .having("
+        count(groups_players.player_id) < #{2} AND
+        groups.is_active IS true #{additional_sql} AND
+        groups.creator_id <> #{current_player.id}
+      ")
+      .where("groups_players.player_id <> #{current_player.id}")
+      .order('groups.created_at DESC')
       .offset((page - 1) * @@pagination_limit)
       .limit(@@pagination_limit)
+      .select('groups.*, count(groups_players.player_id) as players_count')
   end
 
   def add_player(player)
@@ -28,11 +36,11 @@ class Group < ActiveRecord::Base
     elsif players.pluck(:id).include?(player.id)
       can_add = false
       self.errors[:base] << 'You are already in this group.'
-    elsif
+    elsif self.creator_id == player.id
       can_add = false
       self.errors[:base] << 'You created this group.'
     end
-    
+
     self.players << player if can_add
     can_add
   end
